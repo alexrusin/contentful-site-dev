@@ -1,5 +1,7 @@
 import { IWelcomeSection, IWelcomeSectionFields } from "@/contentful";
 import CallToActionButton from "./call-to-action-button";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import richtextRenderOptions from "@/lib/rich-text-render-opitons";
 
 export default function WelcomeSection({
   welcomeSection,
@@ -22,9 +24,10 @@ export default function WelcomeSection({
         <div className="order-2 space-y-4">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold">{welcomeSectionFields.title}</h2>
-            <p className="text-gray-700 dark:text-gray-400">
-              {welcomeSectionFields.introduction}
-            </p>
+            {documentToReactComponents(
+              welcomeSectionFields.intro,
+              richtextRenderOptions
+            )}
           </div>
           {callToActionButton && (
             <CallToActionButton callToActionButton={callToActionButton} />
